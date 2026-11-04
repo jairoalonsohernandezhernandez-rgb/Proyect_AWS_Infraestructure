@@ -17,3 +17,8 @@ output "dlq_arn" {
     description = "ARN de la Dead Letter Queue"
     value = aws_sqs_queue.dlq.arn
 }
+
+output "queue_url" {
+    description = "URL de la cola"
+    value = aws_sqs_queue.main.url
+}

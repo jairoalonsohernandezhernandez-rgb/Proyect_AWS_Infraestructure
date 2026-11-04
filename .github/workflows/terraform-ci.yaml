@@ -46,3 +46,12 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve tfplan
+
+      - name: Extract Terraform Outputs to Environment
+        run: |
+          cd terraform
+          # Capturamos el output y lo inyectamos a la sesión de GitHub Actions
+          echo "SQS_QUEUE_URL=$(terraform output -raw sqs_queue_url)" >> $GITHUB_ENV
+          echo "S3_BUCKET_NAME=$(terraform output -raw s3_bucket_name)" >> $GITHUB_ENV
+          echo "LAMBDA_FUNCTION_NAME=$(terraform output -raw lambda_function_name)" >> $GITHUB_ENV
+          echo "API_GATEWAY_ID=$(terraform output -raw api_gateway_id)" >> $GITHUB_ENV
