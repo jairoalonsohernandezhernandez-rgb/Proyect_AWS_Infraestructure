@@ -10,7 +10,7 @@ output "lambda_function_name" {
 
 output "sqs_queue_url" {
     description = "URL de la cola SQS"
-    value = module.sqs.queue_url
+    value = module.sqs_queue.queue_url
 }
 
 output "api_gateway_id" {
